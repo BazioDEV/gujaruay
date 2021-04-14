@@ -1,0 +1,16 @@
+[0;1;31mWarning:[0m The unit file, source configuration file or drop-ins of gunicorn.service changed on disk. Run 'systemctl daemon-reload' to reload units.
+[0;1;31m●[0m gunicorn.service
+     Loaded: loaded (/etc/systemd/system/gunicorn.service; enabled; vendor preset: enabled)
+     Active: [0;1;31mfailed[0m (Result: exit-code) since Wed 2021-04-14 13:50:13 UTC; 1min 1s ago
+   Main PID: 3136 (code=exited, status=203/EXEC)
+
+Apr 14 13:50:13 gujaruay systemd[1]: [0;1;38;5;185m[0;1;39m[0;1;38;5;185mgunicorn.service: Failed with result 'exit-code'.[0m
+Apr 14 13:50:17 gujaruay systemd[1]: [0;1;38;5;185m[0;1;39m[0;1;38;5;185m/etc/systemd/system/gunicorn.service:1: Assignment outside of section. Ignoring.[0m
+Apr 14 13:50:17 gujaruay systemd[1]: [0;1;38;5;185m[0;1;39m[0;1;38;5;185m/etc/systemd/system/gunicorn.service:2: Assignment outside of section. Ignoring.[0m
+Apr 14 13:50:17 gujaruay systemd[1]: [0;1;38;5;185m[0;1;39m[0;1;38;5;185m/etc/systemd/system/gunicorn.service:3: Assignment outside of section. Ignoring.[0m
+Apr 14 13:50:17 gujaruay systemd[1]: [0;1;38;5;185m[0;1;39m[0;1;38;5;185m/etc/systemd/system/gunicorn.service:1: Assignment outside of section. Ignoring.[0m
+Apr 14 13:50:17 gujaruay systemd[1]: [0;1;38;5;185m[0;1;39m[0;1;38;5;185m/etc/systemd/system/gunicorn.service:2: Assignment outside of section. Ignoring.[0m
+Apr 14 13:50:17 gujaruay systemd[1]: [0;1;38;5;185m[0;1;39m[0;1;38;5;185m/etc/systemd/system/gunicorn.service:3: Assignment outside of section. Ignoring.[0m
+Apr 14 13:50:22 gujaruay systemd[1]: [0;1;38;5;185m[0;1;39m[0;1;38;5;185m/etc/systemd/system/gunicorn.service:1: Assignment outside of section. Ignoring.[0m
+Apr 14 13:50:22 gujaruay systemd[1]: [0;1;38;5;185m[0;1;39m[0;1;38;5;185m/etc/systemd/system/gunicorn.service:2: Assignment outside of section. Ignoring.[0m
+Apr 14 13:50:22 gujaruay systemd[1]: [0;1;38;5;185m[0;1;39m[0;1;38;5;185m/etc/systemd/system/gunicorn.service:3: Assignment outside of section. Ignoring.[0m

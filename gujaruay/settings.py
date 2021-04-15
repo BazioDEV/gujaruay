@@ -1,21 +1,37 @@
 import os
 from pathlib import Path
+from decouple import config
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '-$6svben%7dbkq^+8)4w&x#j2z+tb=g2@n6!8wul#ngmgk+bld'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+TEMPLATE_DEBUG = DEBUG
 
-ALLOWED_HOSTS = ['172.105.113.136']
-CELERY_BROKER_URL = 'amqp://localhost'
+if DEBUG:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(BASE_DIR, 'dev.sqlite3'),
+        }
+    }
+else:
+    DATABASE = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': config('DB_NAME'),
+            'USER': config('DB_USER'),
+            'PASSWORD': config('DB_PASS'),
+            'HOST': config('DB_HOST'),
+            'PORT': config('DB_PORT')
+        }
+    }
+
+
+ALLOWED_HOSTS = ['172.105.113.136', '127.0.0.1']
+CELERY_BROKER_URL = 'amqp://guest:guest@localhost'
 CELERY_RESULT_BACKEND = "amqp"
 CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
@@ -30,18 +46,18 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'whitenoise.runserver_nostatic',
     'django.contrib.staticfiles',
+    'storages',
     'core',
     'thlotto',
     'laolotto',
     'rest_framework',
     'rest_framework.authtoken',
+    'api',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.midlleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -69,17 +85,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'gujaruay.wsgi.application'
-
-
-# Database
-# https://docs.djangoproject.com/en/3.1/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
 
 
 # Password validation
@@ -126,22 +131,26 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'static', 'media')
+
+
+# DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+# STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-#BUCKET
+# #BUCKET
 
-BUCKET_NAME='gujaruay-staticfiles'
-BUCKET_URL='gujaruay-staticfiles.ap-south-1.linodeobjects.com'
-LINODE_BUCKET_REGION='ap-south-1'
-LINODE_BUCKET_ACCESS_KEY='YJ83NOT9R0VKUE3XYD4U'
-LINODE_BUCKET_SECRET_KEY='lvnJv62IbgDSersnuW32Sf3wuy9wBlPlVuJ49U9b'
+# BUCKET_NAME='gujaruay-staticfiles'
+# BUCKET_URL='gujaruay-staticfiles.ap-south-1.linodeobjects.com'
+# LINODE_BUCKET_REGION='ap-south-1'
+# LINODE_BUCKET_ACCESS_KEY='YJ83NOT9R0VKUE3XYD4U'
+# LINODE_BUCKET_SECRET_KEY='lvnJv62IbgDSersnuW32Sf3wuy9wBlPlVuJ49U9b'
 
-AWS_S3_ENDPOINT_URL=f'https://{LINODE_BUCKET_REGION}.linodeobjects.com'
-AWS_ACCESS_KEY_ID=LINODE_BUCKET_ACCESS_KEY
-AWS_SECRET_ACCESS_KEY=LINODE_BUCKET_SECRET_KEY
-AWS_S3_REGION_NAME=LINODE_BUCKET_REGION
-AWS_S3_USE_SSL=True
-AWS_STORAGE_BUCKET_NAME=BUCKET_NAME
+# AWS_S3_ENDPOINT_URL=f'https://{LINODE_BUCKET_REGION}.linodeobjects.com'
+# AWS_ACCESS_KEY_ID=LINODE_BUCKET_ACCESS_KEY
+# AWS_SECRET_ACCESS_KEY=LINODE_BUCKET_SECRET_KEY
+# AWS_S3_REGION_NAME=LINODE_BUCKET_REGION
+# AWS_S3_USE_SSL=True
+# AWS_STORAGE_BUCKET_NAME=BUCKET_NAME

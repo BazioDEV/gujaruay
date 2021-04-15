@@ -9,6 +9,6 @@ class gov_thai(models.Model):
     ThreeUnderTwo = models.CharField(max_length=20)
     TwoUnder = models.CharField(max_length=20)
     date = models.CharField(max_length=30)
-        
+
     def __str__(self):
         return self.title

@@ -1,14 +1,10 @@
-from django.urls import path, include
-from rest_framework import routers
-from . import views
-
-router = routers.DefaultRouter()
-router.register(r'th_latest', views.gov_thaiViewSet)
-# router.register(r'laos-vip', views.VipResultViewSet)
-# router.register(r'laos-lotto', views.LottoResultViewSet)
-
+from django.urls import path
+from rest_framework.urlpatterns import format_suffix_patterns
+from thlotto import views
 
 urlpatterns = [
-    path('', include(router.urls)),
-    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    path(r'result/', views.gov_thaiList.as_view()),
+    path(r'result/<int:pk>/', views.gov_thaiDetail.as_view()),
 ]
+
+urlpatterns = format_suffix_patterns(urlpatterns)

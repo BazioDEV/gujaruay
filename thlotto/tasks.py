@@ -3,6 +3,7 @@ from time import sleep
 from .models import gov_thai
 from celery import shared_task
 from bs4 import BeautifulSoup
+from .views import gov_thaiDetail
 import requests
 import json
 
